@@ -32,6 +32,7 @@
     kafka-topics.sh --describe --topic KafkaEssentials --zookeeper localhost:2181
 
 <br>
+
 ### Create a console producer that publishes to topic KafkaEssentials
 
     kafka-console-producer.sh --broker-list localhost:9092 --topic KafkaEssentials
