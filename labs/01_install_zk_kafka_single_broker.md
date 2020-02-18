@@ -1,4 +1,7 @@
-## Install Kafka
+## Install and Run Kafka in a Single Broker
+
+- Deploy a single instance of Kafka and Zookeeper.
+- Requires at least 4gb of RAM on an Ubuntu machine.
 
 ### 1. Download kafka
 Go to kafka downloads `https://kafka.apache.org/downloads` and choose `Kafka 2.0.0` and `scala 2.12` and download the binary
