@@ -39,6 +39,10 @@
 ### Create a console producer that publishes to topic KafkaEssentials
 
     kafka-console-producer.sh --broker-list localhost:9092 --topic KafkaEssentials
+    
+    # note: you can pass properties from console
+        kafka-console-producer.sh --broker-list localhost:9092 --topic KafkaEssentials --producer-property acks=all
+
 
 Publish some text to the topic
 
@@ -111,6 +115,19 @@ Open a new terminal window
 Now publish to both producers.
 
 Check your new consumer to see the behavior of both topics.
+
+
+### Create a producer for which topic has not been created
+
+    kafka-console-producer.sh --broker-list localhost:9092 --topic KafkaEssentials-3
+    
+    ## if you enter a message in this producer console; it will give a warning that leader is not elected. But since Kafka producers recover from errors, running the above command will create a topic and elect a leader
+    
+    kafka-topics.sh --describe --topic KafkaEssentials-3 --zookeeper localhost:2181
+    
+Kafka will auto-create the topic with `1` replication-factor and `1` partition. 
+
+- Note: you can change the default number of partitions in `server.properties` ===> `num.partitions (default is 1)`
 
 
 
