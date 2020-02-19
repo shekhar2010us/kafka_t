@@ -50,9 +50,39 @@
 
 *One consumer will first get all message and second won't, because in a group messages are committed just once - to make sure that collectively all consumers in a group will receive all message just once*
 
-<br>
+### Use kafka-consumer-groups
+	
+    # list consumer-groups
+    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+    ## result: there is a `my-app` consumer group with bunch of others.
+    ## if you start a consumer without a consumer-group, kafka creates a random consumer-group
+    
+    # describe a group
+    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-app
+    ## result: it will say - "Consumer group 'my-app' has no active members" if you have killed all your previous consumers
+    ## Rest it will show a table of all partitions and their consumer offsets
 
 
+### Reset Consumer Offsets
+	
+    # reset consumer offsets
+    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --group my-app --reset-offsets --to-earliest --execute --topic KafkaEssentials-4
+    
+	   %% result: all offsets are resetted for all partitions
+    TOPIC                          PARTITION  NEW-OFFSET
+	KafkaEssentials-4              2          0
+	KafkaEssentials-4              1          0
+	KafkaEssentials-4              0          0
+	
+	# describe the group
+    kafka-consumer-groups.sh --bootstrap-server localhost:9092 --describe --group my-app
+    
+	# restart consumer in the same group
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic KafkaEssentials-4 --group my-app 
+    ## result: you will see messages because offsets were resetted
+
+    
+    
 
 # Trouble Shooting
 
