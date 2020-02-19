@@ -2,38 +2,27 @@
 
 You must have zookeeper and kafka installed on your machine.  If not use
 
-https://github.com/smhillin/kafka_essentials/blob/master/single_kafka_install.md
+`https://github.com/shekhar2010us/kafka_t/blob/master/labs/01_install_zk_kafka_single_broker.md`
+
 
 ## Install Python 3.6 on VM (20 Minutes)
     
-    cd /opt
+    sudo apt install -y python-pip
+    sudo apt install -y python3-pip
 
-    sudo wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
-    
-    sudo tar -xvf Python-3.6.3.tgz
-    
-    cd Python-3.6.3
-    
-    sudo ./configure
-    
-    sudo apt-get install build-essential libssl-dev libffi-dev python-dev
-    
-    sudo make
-    
-    sudo make install
-    
-install kafka modulepip for Python
-
-    sudo pip3 install kafka-python
-    
+    pip install kafka
+    pip3 install kafka
+        
 Check your version of Python
     
-    python3.6 -V
+    which python
+    python --version
+    python3 --version
 
 
 ## Download Source Code
 
-    cd
+    cd ~
 
     git clone https://github.com/smhillin/kafka_essentials
     
@@ -41,9 +30,10 @@ Check your version of Python
 
 ## Take a look at your text file
 
-   cat logs/logs.txt
+   head logs/logs.txt
+   wc -l logs/logs.txt 
    
-Here we have an apache log file with 1000's of log entry's.
+Here we have a log file with 163416 lines of log entry's.
 
 
 ##  Create a Producer
@@ -54,7 +44,7 @@ real time logging.
 
 Luckily this has already been done for you!  Check it out
 
-    nano code/log_consumer.py
+    vi code/log_consumer.py
    
  
 
@@ -63,27 +53,27 @@ Luckily this has already been done for you!  Check it out
 
 We are going to write a producer that polls a kafka topic for log data.  When that topic has data we will take the unstructured log
 data and process it into a structure that we can later perform some analysis on. 
-
-
-    cd code
     
     
-    nano code/log_producer.py
+    vi code/log_producer.py
+    
+    vi code/log_parser.py
     
     
-    nano code/log_parser.py
-    
-    
-## Run consumer and producer
+## Run consumer and producer in two tabs
 
 Open another terminal window and ssh into your vm.  Go to kafka_essentials directory.
 Run both of these consumers.
-
+	
+	# in first terminal
     sudo python3 code/log_consumer.py
-    
+   
+    # in second terminal 
     sudo python3 code/log_producer.py
 
+
 Watch your consumer process the data as it is written to the topic!
+If you want quicker, change sleep(3) to something smaller
 
 
 
@@ -93,5 +83,5 @@ Watch your consumer process the data as it is written to the topic!
 
 Problems with Python installation.  Run this and then rebuild.
 
-sudo apt-get install build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev 
+- sudo apt-get install build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev 
 libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev
