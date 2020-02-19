@@ -130,6 +130,31 @@ Kafka will auto-create the topic with `1` replication-factor and `1` partition.
 - Note: you can change the default number of partitions in `server.properties` ===> `num.partitions (default is 1)`
 
 
+### Create a consumer group
+	
+	# we need three terminals for this section.
+	
+    # Terminal 1 :- create a topic and run the producer
+    kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic KafkaEssentials-4
+    
+    kafka-console-producer.sh --broker-list localhost:9092 --topic KafkaEssentials-4
+    
+    # Terminal 2 :-  start consumer 1 but now with group
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic KafkaEssentials-4 --group my-app
+    
+    # Terminal 3 :-  start consumer 2 with the same group (in a different terminal)
+    kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic KafkaEssentials-4 --group my-app 
+    
+    ## check the result:-  messages are divided in all consumers
+
+### TASK:- Create a consumer group
+
+- Try creating a consumer group with 2 consumers. Start the consumers with `--from-beginning` parameter.
+- Check the result
+
+*One consumer will first get all message and second won't, because in a group messages are committed just once - to make sure that collectively all consumers in a group will receive all message just once*
+
+<br>
 
 # Trouble Shooting
 
