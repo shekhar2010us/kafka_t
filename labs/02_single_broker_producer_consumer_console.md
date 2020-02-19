@@ -31,6 +31,9 @@
     
     kafka-topics.sh --describe --topic KafkaEssentials --zookeeper localhost:2181
 
+
+![](images/describe-topic.png)
+
 <br>
 
 ### Create a console producer that publishes to topic KafkaEssentials
