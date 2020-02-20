@@ -5,6 +5,8 @@
 
 #### create a topic "movie_topic"
 
+We will use this topic for this and the next lab on kafka streams
+
 ```
 kafka-topics.sh --zookeeper localhost:2181 --create --topic movie_topic --partitions 2 --replication-factor 1
 ```
@@ -21,12 +23,18 @@ kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic movie_topic 
 
 ```
 cd ~/kafka_java/
-mvn clean install -U
+
+## check the java class
+vi src/main/java/com/shekhar/kafka/file/FileProducer.java
+## exit
+
 
 ## run the main class
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.file.FileProducer"
 
 ## result: when you check the two consumers - you can see json message containing movie review and sentiment in both consumers
+
+### stop all three terminals
 ```
 
 
@@ -55,10 +63,14 @@ In the code, go to the java class `com.shekhar.kafka.elasticsearch.Elasticsearch
 
 
 ```
+
+## check the java class
+vi src/main/java/com/shekhar/kafka/elasticsearch/ElasticsearchTest.java
+
 ## run the main class ElasticsearchTest - just to test if we can connect to elasticsearch from our java code
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.elasticsearch.ElasticsearchTest"
 
-#### result -- you will see an _id. Also go to bonsai and check the "movie" index
+#### result -- you will see an "_id" in the log. Go to bonsai and check the "movie" index by running GET on "/movie/rating/_id"
 ```
 
 
@@ -67,6 +79,12 @@ mvn exec:java -Dexec.mainClass="com.shekhar.kafka.elasticsearch.ElasticsearchTes
 Open 3 terminals
 
 ```
+
+## check the java class
+vi src/main/java/com/shekhar/kafka/elasticsearch/ElasticsearchConsumer.java
+---> here the consumer of topic "movie_topic" is consuming movie ratings and indexing in elasticsearch
+
+
 cd ~/kafka_java/
 
 ## terminal 1: Run the movie producer - this will start putting messages to the topic "movie_topic"
@@ -84,8 +102,13 @@ mvn exec:java -Dexec.mainClass="com.shekhar.kafka.elasticsearch.ElasticsearchCon
 ----> this will log "id" for documents inserted to elasticsearch. check elasticsearch for the documents
 -----> Get -- /movie/rating/<id>
 
-----> you can also go to a browser and check "http://<es_host>:9200/movie/_search"
-replace <es_host> with yours
+----> you can also go to a browser and check
+	"http://<es_host>:9200/movie/_search"
+	-- for all documents in movie index
+	"http://<es_host>:9200/_cat/indices?v"
+	-- to check how many documents has been indexed
+	
+	note:- replace <es_host> with yours
 ```
 
 
