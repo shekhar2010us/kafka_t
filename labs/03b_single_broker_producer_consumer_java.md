@@ -18,7 +18,7 @@ cd /home/ubuntu/kafka_java
 mvn clean install -U
 ```
 
-### 2. Start a consumer and run ProducerDemo
+### 2. Start a consumer in console and run ProducerDemo in maven
 
 ```shell
 ## check if you have a topic called "first_topic"
@@ -108,7 +108,4 @@ mvn exec:java -Dexec.mainClass="com.shekhar.kafka.basic.ConsumerDemo"
 
 ## If you open a third terminal and run the main class of ProducerKeys, you will see that now messages are received in two consumers
 ```
-
-### 5. ConsumerGroupsDemo
-Implement "ConsumerGroups" in a java code.
 
