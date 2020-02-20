@@ -111,6 +111,10 @@ mvn exec:java -Dexec.mainClass="com.shekhar.kafka.elasticsearch.ElasticsearchCon
 	note:- replace <es_host> with yours
 ```
 
+### cleanup
+
+Stop all terminals
+
 
 ### Kibana
 

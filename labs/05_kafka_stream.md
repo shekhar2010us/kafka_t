@@ -4,6 +4,26 @@ Overall idea:
 
 Movie ratings from file -> push to Kafka Producer to topic "movie_topics" -> Consume the topic in kafka streams -> process each message in the stream; output if the sentiment prediction is correct -> push the correctness of sentiment into a new topic "new_movie_topic" -> create consumers for both topic and test
 
+## Setup
+
+By now you have been running lot of producers, consumers and elasticsearch code. Your system might be running in low memory.
+One of the way to free memory is to kill processes running producers and consumers
+
+```
+free -m
+---> note the numbers
+
+jps
+---> check how many console producers & consumers are running
+
+
+jps | grep ConsoleConsumer | awk -F" " '{print $1}'  | xargs kill -9
+jps | grep ConsoleProducer | awk -F" " '{print $1}'  | xargs kill -9
+
+free -m
+---> check again
+```
+
 
 ### Step 1:
 
@@ -37,7 +57,6 @@ Run the java code for the producer that push movie ratings from the file.
 ```
 ## run FileProducer class in background
 cd ~/kafka_java
-mvn clean install -U
 
 nohup mvn exec:java -Dexec.mainClass="com.shekhar.kafka.file.FileProducer" &
 
@@ -50,6 +69,10 @@ nohup mvn exec:java -Dexec.mainClass="com.shekhar.kafka.file.FileProducer" &
 Use Kafka Stream to analyze mesaages in the topic "movie_topic" and push predictions to the new topic
 
 ```
+## check the java class
+vi src/main/java/com/shekhar/kafka/stream/StreamFilterMovieRatings.java
+
+
 ## run StreamFilterMovieRatings class in background
 nohup mvn exec:java -Dexec.mainClass="com.shekhar.kafka.stream.StreamFilterMovieRatings" &
 
