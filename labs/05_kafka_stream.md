@@ -77,8 +77,24 @@ vi src/main/java/com/shekhar/kafka/stream/StreamFilterMovieRatings.java
 nohup mvn exec:java -Dexec.mainClass="com.shekhar.kafka.stream.StreamFilterMovieRatings" &
 
 ---> result: you will see messages will start coming to the second consumer about "Predicted Correctly" or "I am not intelligent enough to predict this correctly"
+
+
+----> Stop all terminals
 ```
 
 <br>
 <p>!! <b>Congratulations.</b> You have build an application that reads movie ratings from logs, process and predict the sentiment using kafkastreams</p>
 
+
+## cleanup
+
+```
+## clean console producers and consumers
+jps | grep ConsoleConsumer | awk -F" " '{print $1}'  | xargs kill -9
+jps | grep ConsoleProducer | awk -F" " '{print $1}'  | xargs kill -9
+
+## stop movie elasticsearch producers and stream
+ps -ef | grep FileProducer | awk -F" " '{print $2}' | xargs kill -9
+
+ps -ef | grep StreamFilterMovieRatings | awk -F" " '{print $2}' | xargs kill -9
+```
