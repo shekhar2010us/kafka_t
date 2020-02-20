@@ -73,7 +73,7 @@ cd ~/kafka_java/
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.file.FileProducer"
 
 ## terminal 2: start a consumer
-kafka-console-producer.sh --broker-list localhost:9092 --topic movie_topic
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic movie_topic --from-beginning
 
 ----> this will show the messages coming in
 
@@ -83,6 +83,16 @@ mvn exec:java -Dexec.mainClass="com.shekhar.kafka.elasticsearch.ElasticsearchCon
 
 ----> this will log "id" for documents inserted to elasticsearch. check elasticsearch for the documents
 -----> Get -- /movie/rating/<id>
+
+----> you can also go to a browser and check "http://<es_host>:9200/movie/_search"
+replace <es_host> with yours
 ```
 
 
+### Kibana
+
+<b>Assignment</b>
+
+- Go to Kibana
+- Go to "Create index" on the left, search for "movie", click next
+- create a data table or a graph based on class:positive|negative
