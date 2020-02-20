@@ -30,6 +30,10 @@ kafka-topics.sh --zookeeper localhost:2181 --create --topic first_topic --partit
 ## run a console consumer
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic
 
+## check the ProducerDemo class
+vi src/main/java/com/shekhar/kafka/basic/ProducerDemo.java
+---> exit
+
 ## run the main class ProducerDemo
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.basic.ProducerDemo"
 
@@ -42,6 +46,11 @@ This has a callback function, with overriden method `onCompletion` that takes ca
 
 ```shell
 ## assuming the consumer is still running
+
+## check the ProducerDemo class
+vi src/main/java/com/shekhar/kafka/basic/ProducerDemoWithCallback.java
+---> exit
+
 
 ## run the main class ProducerDemoWithCallback
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.basic.ProducerDemoWithCallback"
@@ -62,13 +71,25 @@ This has a (Key,value) in the message. The data is read from a file, and there a
 ```shell
 ## Kill your console consumer for this section. We will create two consumers under a consumer group, since we have 2 partitions for this topic.
 
-## build the project
-cd /home/ubuntu/kafka_java
-mvn clean install -U
-
 ## start two consumers in a group
 ## open "two tabs" and run this in both
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic first_topic --group my-app-1
+
+## in the third terminal, check consumer group
+## list the consumer group
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+## describe the consumer group
+kafka-consumer-groups.sh --bootstrap-server localhost:9092  --group my-app-1 --describe
+----> result: since two consumers are running in the group, it will output something like
+
+	TOPIC           PARTITION  CURRENT-OFFSET  LOG-END-OFFSET  LAG             CONSUMER-ID                                     HOST            CLIENT-ID
+	first_topic     1          6               6               0               consumer-1-c78db44f-bd7c-4f1d-99b4-39c0644204c7 /172.31.27.145  consumer-1
+	first_topic     0          5               5               0               consumer-1-2e72f34d-f665-4bd8-ba68-e93450eeafff /172.31.27.145  consumer-1
+
+
+## check the class
+vi src/main/java/com/shekhar/kafka/basic/ProducerDemoKeys.java
+## exit
 
 ## run the main class ProducerDemoWithCallback in a third tab
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.basic.ProducerDemoKeys"
@@ -85,7 +106,11 @@ Implement "Consumer" in a java code.
 
 ## build the project
 cd /home/ubuntu/kafka_java
-mvn clean install -U
+
+## check the class
+vi src/main/java/com/shekhar/kafka/basic/ConsumerDemo.java
+## exit
+
 
 ## run the main class ProducerDemoWithCallback in a third tab
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.basic.ConsumerDemo"

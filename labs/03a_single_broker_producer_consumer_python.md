@@ -31,8 +31,10 @@ Check your version of Python
 
 ## Take a look at your text file
 
-   head logs/logs.txt
-   wc -l logs/logs.txt 
+```
+head logs/logs.txt
+wc -l logs/logs.txt 
+```
    
 Here we have a log file with 163416 lines of log entry's.
 

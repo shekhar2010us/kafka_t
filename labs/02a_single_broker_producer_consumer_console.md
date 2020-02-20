@@ -94,7 +94,7 @@ Check your consumer.  What is the result?
 
 Close your consumers (not producers)
 
-    ctrl-z (in both consumer tabs)
+    ctrl-z (in both consumer tabs, not the producer)
     
     
 ### Create another topic
@@ -132,6 +132,12 @@ Kafka will auto-create the topic with `1` replication-factor and `1` partition.
 
 - Note: you can change the default number of partitions in `server.properties` ===> `num.partitions (default is 1)`
 
+
+### check number of messages in a topic
+
+```
+kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic KafkaEssentials-3 --time -1
+```
 
 
 
