@@ -72,11 +72,17 @@ cd ~/kafka_java/
 ## terminal 1: Run the movie producer - this will start putting messages to the topic "movie_topic"
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.file.FileProducer"
 
-## terminal 2: run the Elastic consumer - this will consume messages from topic "movie_topic" and index to elasticsearch
+## terminal 2: start a consumer
+kafka-console-producer.sh --broker-list localhost:9092 --topic movie_topic
+
+----> this will show the messages coming in
+
+
+## terminal 3: run the Elastic consumer - this will consume messages from topic "movie_topic" and index to elasticsearch
 mvn exec:java -Dexec.mainClass="com.shekhar.kafka.elasticsearch.ElasticsearchConsumer"
 
-#### result -- you will see an _id. Also go to bonsai and check the "movie" index
-
+----> this will log "id" for documents inserted to elasticsearch. check elasticsearch for the documents
+-----> Get -- /movie/rating/<id>
 ```
 
 
