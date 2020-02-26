@@ -61,6 +61,8 @@ We only need HOSTNAME.
 <b>*Replace with your credentials in the code:-*</b>
 In the code, go to the java class `com.shekhar.kafka.elasticsearch.ElasticsearchConsumer`, and change the `esAccessUrl`, `accessKey` and `accessSecret` with yours.
 
+In the code, go to the java class `com.shekhar.kafka.elasticsearch.ElasticsearchTest`, and change the `esAccessUrl`, `accessKey` and `accessSecret` with yours.
+
 
 ```
 #cd to kafka_java directory
