@@ -67,14 +67,6 @@ In the code, go to the java class `com.shekhar.kafka.elasticsearch.Elasticsearch
 ```
 #cd to kafka_java directory
 mvn clean install -U
-
-## check the java class
-vi src/main/java/com/shekhar/kafka/elasticsearch/ElasticsearchTest.java
-
-## run the main class ElasticsearchTest - just to test if we can connect to elasticsearch from our java code
-mvn exec:java -Dexec.mainClass="com.shekhar.kafka.elasticsearch.ElasticsearchTest"
-
-#### result -- you will see an "_id" in the log. Go to bonsai and check the "movie" index by running GET on "/movie/rating/_id"
 ```
 
 
