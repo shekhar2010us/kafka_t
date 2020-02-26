@@ -63,6 +63,8 @@ In the code, go to the java class `com.shekhar.kafka.elasticsearch.Elasticsearch
 
 
 ```
+#cd to kafka_java directory
+mvn clean install -U
 
 ## check the java class
 vi src/main/java/com/shekhar/kafka/elasticsearch/ElasticsearchTest.java
